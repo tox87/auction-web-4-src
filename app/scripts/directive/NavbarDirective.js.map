@@ -1,0 +1,1 @@
+{"version":3,"file":"NavbarDirective.js","sourceRoot":"","sources":["NavbarDirective.ts"],"names":[],"mappings":"AAAA,mCAAmC;AAEnC,YAAY;AAEZ,OAAO,CAAC,MAAM,CAAC,YAAY,CAAC,CACvB,SAAS,CAAC,eAAe,EAAE;IACxB,OAAO;QACH,KAAK,EAAE,IAAI;QACX,QAAQ,EAAE,GAAG;QACb,WAAW,EAAE,2BAA2B;KAC3C;AACL,CAAC,CAAC"}
