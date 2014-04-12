@@ -14,7 +14,7 @@ module auction.service {
     export interface IProductService {
         getFeaturedProductItems(): ng.IPromise<m.ProductModel[]>;
         searchProductItems(): ng.IPromise<m.ProductModel[]>;
-        getProductById(productId: number): m.ProductModel;
+        getProductById(productId: number): ng.IPromise<m.ProductModel>;
     }
 
     class ProductService implements IProductService {
@@ -34,29 +34,22 @@ module auction.service {
 
         }
 
-      public searchProductItems(): ng.IPromise<m.ProductModel[]> {
+        public searchProductItems(): ng.IPromise<m.ProductModel[]> {
 
-          var searchProductItems = this.$q.defer<m.ProductModel[]>();
-          this.$http.get('data/search.json')
+        var searchProductItems = this.$q.defer<m.ProductModel[]>();
+        this.$http.get('data/search.json')
               .success((data) => searchProductItems.resolve(<m.ProductModel[]> data.items))
               .error(() => console.log("failed to search products"));
           return searchProductItems.promise;
 
-      }
+        }
 
-      public getProductById(productId: number): m.ProductModel {
-          return <m.ProductModel> {
-              "id"          : 2,
-              "title"       : "Unit 2",
-              "thumb"       : "01-2.jpg",
-              "description" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore adipiscing elit. Ut enim.",
-              "timeleft"    : 2,
-              "watchers"    : 3,
-              "price"       : 43
-          }
-      }
+        public getProductById(productId: number): ng.IPromise<m.ProductModel> {
+          return this.searchProductItems().then(productItems =>  _.find(productItems,
+                  (p:m.ProductModel) => p.id == productId));
+        }
 
-    }
+      }
 
     angular.module('auctionApp').service('productService', ProductService);
 }

@@ -8,24 +8,17 @@ module auction.controller {
     import m = auction.model;
     import s = auction.service;
 
-    interface ISearchScope extends ng.IScope {
-        model: SearchController;
-    }
-
     class SearchController {
 
-        static $inject = ['$scope', 'productService'];
+        static $inject = ['productService'];
+        searchProductItems: m.ProductModel[];
+        lowPrice: number;
+        highPrice: number;
 
-        public searchProductItems: m.ProductModel[];
-
-        constructor(private $scope: ISearchScope,
-                    private productService: s.IProductService) {
-
-            this.$scope.model = this;
+        constructor(private productService: s.IProductService) {
             this.productService.searchProductItems()
                 .then((products) => this.searchProductItems = products);
         }
-
     }
 
     angular.module('auctionApp').controller('SearchController', SearchController);

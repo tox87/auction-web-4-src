@@ -13,27 +13,34 @@ module auction {
         title: string;
     }
 
-    angular.module('auctionApp', ['ngRoute'])
+    angular.module('auctionApp', ['ngRoute', 'restangular'])
         .config(['$routeProvider', ($routeProvider: ng.route.IRouteProvider) => {
             $routeProvider
                 .when('/home', {
                     templateUrl: 'views/home.html',
                     controller: 'HomeController',
+                    controllerAs: 'ctrl',
                     title: 'Auction'
                 })
                 .when('/search', {
                     templateUrl: 'views/search.html',
                     controller: 'SearchController',
+                    controllerAs: 'ctrl',
                     title: 'Search Products'
                 })
                 .when('/product/:productId', {
-                    templateUrl: 'views/details.html',
-                    controller: 'ProductDetailsController',
+                    templateUrl: 'views/product.html',
+                    controller: 'ProductController',
+                    controllerAs: 'ctrl',
                     title: 'Product Details'
+//                  todo: impl ProductController.resolve
                 })
                 .otherwise({
                     redirectTo: '/home'
                 });
+        }])
+        .config(['RestangularProvider', (RestangularProvider) => {
+            RestangularProvider.setBaseUrl('/rest/v1');
         }])
         .run(['$rootScope',($rootScope: IAuctionRootScope) => {
             $rootScope.$on('$routeChangeStart', (event: any, next: IAuctionRoute) => {

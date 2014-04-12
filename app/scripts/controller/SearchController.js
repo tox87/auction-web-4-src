@@ -6,16 +6,14 @@ var auction;
         'use strict';
 
         var SearchController = (function () {
-            function SearchController($scope, productService) {
+            function SearchController(productService) {
                 var _this = this;
-                this.$scope = $scope;
                 this.productService = productService;
-                this.$scope.model = this;
                 this.productService.searchProductItems().then(function (products) {
                     return _this.searchProductItems = products;
                 });
             }
-            SearchController.$inject = ['$scope', 'productService'];
+            SearchController.$inject = ['productService'];
             return SearchController;
         })();
 

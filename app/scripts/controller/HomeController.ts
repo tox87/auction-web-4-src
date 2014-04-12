@@ -8,25 +8,16 @@ module auction.controller {
     import m = auction.model;
     import s = auction.service;
 
-    interface IHomeScope extends ng.IScope {
-        model: HomeController;
-    }
-
     class HomeController {
 
-            static $inject = ['$scope', 'productService'];
+        static $inject = ['productService'];
+        featuredProductItems: m.ProductModel[];
 
-            public featuredProductItems: m.ProductModel[];
-
-            constructor(private $scope: IHomeScope,
-                        private productService: s.IProductService) {
-
-                this.$scope.model = this;
-                this.productService.getFeaturedProductItems()
-                    .then((products) => this.featuredProductItems = products);
-            }
+        constructor(private productService: s.IProductService) {
+           this.productService.getFeaturedProductItems()
+               .then((products) => this.featuredProductItems = products);
         }
+    }
 
     angular.module('auctionApp').controller('HomeController', HomeController);
 }
-

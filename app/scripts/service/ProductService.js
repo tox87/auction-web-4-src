@@ -34,15 +34,11 @@ var auction;
             };
 
             ProductService.prototype.getProductById = function (productId) {
-                return {
-                    "id": 2,
-                    "title": "Unit 2",
-                    "thumb": "01-2.jpg",
-                    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore adipiscing elit. Ut enim.",
-                    "timeleft": 2,
-                    "watchers": 3,
-                    "price": 43
-                };
+                return this.searchProductItems().then(function (productItems) {
+                    return _.find(productItems, function (p) {
+                        return p.id == productId;
+                    });
+                });
             };
             ProductService.$inject = ['$http', '$q'];
             return ProductService;

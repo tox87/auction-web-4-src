@@ -6,16 +6,14 @@ var auction;
         'use strict';
 
         var HomeController = (function () {
-            function HomeController($scope, productService) {
+            function HomeController(productService) {
                 var _this = this;
-                this.$scope = $scope;
                 this.productService = productService;
-                this.$scope.model = this;
                 this.productService.getFeaturedProductItems().then(function (products) {
                     return _this.featuredProductItems = products;
                 });
             }
-            HomeController.$inject = ['$scope', 'productService'];
+            HomeController.$inject = ['productService'];
             return HomeController;
         })();
 
