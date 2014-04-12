@@ -5,7 +5,7 @@
 angular.module('auctionApp')
     .directive('auctionNavbar', () => {
         return {
-            scope: true,
+            scope: false,
             restrict: 'E',
             templateUrl: 'views/partial/navbar.html'
         };

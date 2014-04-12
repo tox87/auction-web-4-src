@@ -5,7 +5,7 @@
 angular.module('auctionApp')
     .directive('auctionFooter', () => {
         return {
-            scope: true,
+            scope: false,
             restrict: 'E',
             templateUrl: 'views/partial/footer.html'
         };
